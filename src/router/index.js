@@ -1,27 +1,77 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import liayc from "../liayc";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "liayc",
+    component: liayc,
+    children: [
+      {
+        path: "/index",
+        name: "index",
+        component: () => import("../views/home"),
+      },
+      {
+        path: "/blog",
+        name: "blog",
+        component: () => import("../views/blog"),
+        reairect: "/article",
+        children: [
+          {
+            path: "label",
+            name: "label",
+            component: () => import("../views/blog/label"),
+          },
+          {
+            path: "category",
+            name: "category",
+            component: () => import("../views/blog/category"),
+          },
+          {
+            path: "article",
+            name: "article",
+            component: () => import("../views/blog/article"),
+          },
+        ],
+      },
+      {
+        path: "/advert",
+        name: "advert",
+        component: () => import("../views/advert"),
+      },
+      {
+        path: "/system",
+        name: "system",
+        component: () => import("../views/system"),
+        reairect: "/user",
+        children: [
+          {
+            path: "user",
+            name: "user",
+            component: () => import("../views/system/user"),
+          },
+          {
+            path: "role",
+            name: "role",
+            component: () => import("../views/system/role"),
+          },
+          {
+            path: "menu",
+            name: "menu",
+            component: () => import("../views/system/menu"),
+          },
+        ],
+      },
+    ],
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
