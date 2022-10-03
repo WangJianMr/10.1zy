@@ -1,26 +1,26 @@
 import request from '../utils/request'
 export const getAllList =(data)=>{
     return request({
-        url:'/label/search',
+        url:'/article/label/search',
         method:'post',
         data,
     })
 }
 export const getComp =(id)=>{
     return request({
-        url:`/label/${id}`,
+        url:`/article/label/${id}`,
         method:'get',
     })
 }
 export const getCompOk =()=>{
     return request({
-        url:`/label`,
+        url:`/article/label`,
         method:'put',
     })
 }
 export const getdel =(id)=>{
     return request({
-        url:`/label/${id}`,
+        url:`/article/label/${id}`,
         method:'DELETE',
     })
 }

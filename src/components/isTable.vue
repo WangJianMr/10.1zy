@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="aricleList" border style="width: 100%">
+    <el-table :data="aricleList" border style="width: 100%"  row-key="id" :tree-props="{children: 'children'}">
       <template v-for="item in aricleListMess">
         <el-table-column
           v-if="item.type == 'index'"
@@ -29,7 +29,7 @@
           :label="item.label"
         >
           <template slot-scope="scope">
-            <img :src="scope.row.imageUrl" alt="">
+            <img :src="scope.row.imageUrl" alt="" />
           </template>
         </el-table-column>
 
@@ -61,6 +61,19 @@
             </el-tag>
           </template>
         </el-table-column>
+
+
+<el-table-column
+          v-else-if="item.type === 'type'"
+          :prop="item.prop"
+          :label="item.label"
+        >
+          <template slot-scope="scope">
+           <span>{{item.callback(scope.row.type)}}</span>
+          </template>
+        </el-table-column>
+
+
         <el-table-column
           v-else
           :prop="item.prop"
@@ -112,7 +125,7 @@ export default {
 </script>
 
 <style>
-img{
+img {
   width: 80px;
   height: 50px;
 }

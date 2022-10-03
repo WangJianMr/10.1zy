@@ -43,7 +43,7 @@
       :title="title"
       v-model="mtkForms"
     >
-      <template v-slot:button="scope" v-if="showId == 1">
+      <template v-slot:button="scope" v-if="showId == 1" class="slot">
         <el-button type="primary" @click="pass">审核通过</el-button>
         <el-button type="danger" @click="noPass">审核不通过</el-button>
       </template>
@@ -317,5 +317,10 @@ export default {
 <style>
 .artcle {
   padding: 20px;
+}
+.slot {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
 }
 </style>

@@ -1,33 +1,34 @@
 import request from '../utils/request'
 export const getAllList =(data)=>{
     return request({
-        url:'/article/category/search',
+        url:'/system/menu/search',
         method:'post',
         data,
     })
 }
-export const getAdd =(data)=>{
+export const getAddOk =(data)=>{
     return request({
-        url:'/article/category',
+        url:'/system/menu',
         method:'post',
         data,
     })
 }
-export const getComp =(id)=>{
+export const getCompInq =(id)=>{
     return request({
-        url:`/article/category/${id}`,
+        url:`/system/menu/${id}`,
         method:'get',
     })
 }
-export const getCompOk =()=>{
+export const getcompOk =(data)=>{
     return request({
-        url:`/article/category`,
+        url:'/system/menu',
         method:'put',
+        data,
     })
 }
-export const getdel =(id)=>{
+export const getDelOk =(id)=>{
     return request({
-        url:`/article/category/${id}`,
+        url:`/system/menu/${id}`,
         method:'DELETE',
     })
 }

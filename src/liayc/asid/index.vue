@@ -45,7 +45,7 @@
           <span>系统管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="system/user"
+          <el-menu-item index="/system/user"
             ><i class="el-icon-user-solid"></i> 用户管理</el-menu-item
           >
         </el-menu-item-group>

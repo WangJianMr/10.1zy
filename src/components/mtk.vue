@@ -18,6 +18,7 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
+          
 
           <el-form-item
             v-if="item.type === 'input'"
@@ -58,6 +59,8 @@
                 v-model="value[item.prop]"
                 v-for="(ele, i) in item.children"
                 :key="i"
+                v-if="!ele.flag"
+                @change="butFlag(ele.name)"
                 >{{ ele.name }}</el-radio
               >
             </el-radio-group>
@@ -176,6 +179,9 @@ export default {
       this.value.imageUrl=res.data
       console.log( this.value);
     },
+    butFlag(name){
+         this.$emit('butFlag',name)
+    }
   },
   created() {
     console.log(this.formList);
@@ -195,11 +201,7 @@ img {
 ::v-deep .ql-editor {
   min-height: 180px !important;
 }
-.slot {
-  width: 300px;
-  margin: 0 auto;
-  text-align: center;
-}
+
 .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
