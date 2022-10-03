@@ -214,9 +214,111 @@ export default {
     },
     //新增
     newly() {
-      this.formLists[0].children[2].flag = true;
       this.dialogVisible = true;
       this.title = "新增";
+      this.mtkForm={
+        type: "",
+        name: "",
+        code: "",
+        url: "",
+        icon: "",
+        sort: "",
+        remark: "",
+      }
+      this.formLists = [
+          {
+            type: "radio",
+            lable: "类型",
+            prop: "type",
+            children: [
+              {
+                name: "目录",
+                label: 1,
+                flag: false,
+              },
+              {
+                name: "菜单",
+                label: 2,
+                flag: false,
+              },
+              {
+                name: "按钮",
+                label: 3,
+                flag: true,
+              },
+            ],
+          },
+          {
+            type: "input",
+            lable: "名称",
+            prop: "name",
+          },
+          {
+            type: "input",
+            lable: "权限标识",
+            prop: "code",
+          },
+          {
+            type: "input",
+            lable: "请求地址",
+            prop: "url",
+          },
+          {
+            type: "input",
+            lable: "图标",
+            prop: "icon",
+          },
+          {
+            type: "sub",
+            lable: "排序",
+            prop: "sort",
+          },
+          {
+            type: "textarea",
+            lable: "备注",
+            prop: "remark",
+          },
+          {
+            type: "but",
+            lable: "操作",
+            prop: "remark",
+            children: [
+              {
+                type: "primary",
+                text: "确定",
+              },
+              {
+                type: "",
+                text: "取消",
+              },
+            ],
+          },
+        ];
+    },
+    cancel() {
+      this.dialogVisible = false;
+    },
+    //添加完成
+    handelAddOk() {
+      if (this.mtkForm.id) {
+        this.handelCompOk();
+      } else {
+      this.handelAdd();
+      }
+    },
+    //添加接口
+    async handelAdd() {
+      try {
+        const add = await getAddOk(this.mtkForm);
+        this.handelAll();
+        this.dialogVisible = false;
+      } catch (error) {}
+    },
+    //按钮新增
+    addBut() {
+      this.formLists[0].children[2].flag = false;
+      this.dialogVisible = true;
+      console.log(this.formLists[0].children[2].flag);
       this.mtkForm={
         type: "",
         name: "",
@@ -295,31 +397,6 @@ export default {
             ],
           },
         ];
-    },
-    cancel() {
-      this.dialogVisible = false;
-    },
-    //添加完成
-    handelAddOk() {
-      if (this.mtkForm.id) {
-        this.handelCompOk();
-      } else {
-      this.handelAdd();
-      }
-    },
-    //添加接口
-    async handelAdd() {
-      try {
-        const add = await getAddOk(this.mtkForm);
-        this.handelAll();
-        this.dialogVisible = false;
-      } catch (error) {}
-    },
-    //按钮新增
-    addBut() {
-      this.formLists[0].children[2].flag = false;
-      this.dialogVisible = true;
-      console.log(this.formLists[0].children[2].flag);
     },
     //按钮
     butFlag(val) {
