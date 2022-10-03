@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :inline="true" :model="value" class="demo-form-inline">
+    <el-form :inline="true" :model="value" class="demo-form-inline" ref="form">
       <template v-for="item in formList">
         <el-form-item
           v-if="item.type === 'input'"
@@ -39,6 +39,11 @@ export default {
     value: {
       type: Object,
       default: () => {},
+    },
+  },
+  methods: {
+    reset() {
+      this.$refs["form"].resetFields();
     },
   },
 };

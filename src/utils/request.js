@@ -2,7 +2,7 @@ import axios from "axios";
 // Add a request interceptor
 const instance = axios.create({
   baseURL: process.env.VUE_APP_API,
-  timeout: 1000,
+  timeout: 3000,
 });
 instance.interceptors.request.use(
   function (config) {
@@ -40,4 +40,4 @@ const request =(options)=>{
     return instance(options)
 }
 
-export default instance
+export default request

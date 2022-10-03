@@ -24,6 +24,31 @@
         </el-table-column>
 
         <el-table-column
+          v-else-if="item.type === 'img'"
+          :prop="item.prop"
+          :label="item.label"
+        >
+          <template slot-scope="scope">
+            <img :src="scope.row.imageUrl" alt="">
+          </template>
+        </el-table-column>
+
+        <el-table-column
+          v-else-if="
+            item.type === 'function' && item.prop === 'status' && item.category
+          "
+          :prop="item.prop"
+          :label="item.label"
+        >
+          <template slot-scope="scope">
+            <el-tag
+              :type="scope.row.status == 0 ? 'danger' : 'success'"
+              v-html="item.callback(scope.row.status)"
+            >
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
           v-else-if="item.type === 'function' && item.prop === 'status'"
           :prop="item.prop"
           :label="item.label"
@@ -48,9 +73,13 @@
         <template slot-scope="scope">
           <slot name="exam" :row="scope.row"></slot>
 
-          <slot v-if="scope.row.status==0" name="audit" :row="scope.row"></slot>
+          <slot
+            v-if="scope.row.status == 0"
+            name="audit"
+            :row="scope.row"
+          ></slot>
 
-          <slot v-if="scope.row.status!=3" name="del" :row="scope.row"></slot>
+          <slot v-if="scope.row.status != 3" name="del" :row="scope.row"></slot>
         </template>
       </el-table-column>
     </el-table>
@@ -82,4 +111,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+img{
+  width: 80px;
+  height: 50px;
+}
+</style>
